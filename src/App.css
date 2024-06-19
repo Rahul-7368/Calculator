@@ -1,4 +1,4 @@
-/* App.css */
+/* App.css
 
 .calculator {
   width: 300px;
@@ -52,4 +52,29 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
+} */
+
+*{
+  text-align: center;
+}
+.container{
+  margin: 10px 100px;
+}
+button{
+  margin: 2px;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+.btn-container{
+  width: 300px;
+  margin: auto;
+}
+input{
+  margin: 20px;
+  width: 250px;
+  height: 30px;
+}
+.result{
+  margin: 10px auto;
 }
