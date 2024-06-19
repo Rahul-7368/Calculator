@@ -18,34 +18,15 @@ const App = () => {
     }
   };
 
-  // const evaluateExpression = () => {
-  //   try {
-  //     const evalResult = eval(expression); 
-  //     setResult(evalResult.toString());
-  //   } catch (error) {
-  //     setResult('Error');
-  //   }
-  // };
-
   const evaluateExpression = () => {
     try {
-      // Check for incomplete expressions and handle them
-      if (/[\d)]$/.test(expression)) {
-        // Sanitize and evaluate the expression
-        const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
-        const evalResult = Function(`'use strict'; return (${sanitizedExpression})`)();
-        if (isNaN(evalResult) && !isFinite(evalResult)) {
-          setResult('NaN');
-        } else {
-          setResult(evalResult.toString());
-        }
-      } else {
-        setResult('Error');
-      }
+      const evalResult = eval(expression); 
+      setResult(evalResult.toString());
     } catch (error) {
       setResult('Error');
     }
   };
+
 
 
   const clearInput = () => {
