@@ -1,7 +1,7 @@
 // App.js
 
 import React, { useState } from 'react';
-import './App.css'; // Import your CSS file for styling
+import './App.css'; 
 
 const App = () => {
   const [expression, setExpression] = useState('');
@@ -14,17 +14,39 @@ const App = () => {
       clearInput();
     } else {
       setExpression(prevExpression => prevExpression + value);
+      setResult('');
     }
   };
 
+  // const evaluateExpression = () => {
+  //   try {
+  //     const evalResult = eval(expression); 
+  //     setResult(evalResult.toString());
+  //   } catch (error) {
+  //     setResult('Error');
+  //   }
+  // };
+
   const evaluateExpression = () => {
     try {
-      const evalResult = eval(expression); // Using eval for simplicity (not recommended for production)
-      setResult(evalResult.toString());
+      // Check for incomplete expressions and handle them
+      if (/[\d)]$/.test(expression)) {
+        // Sanitize and evaluate the expression
+        const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
+        const evalResult = Function(`'use strict'; return (${sanitizedExpression})`)();
+        if (isNaN(evalResult) && !isFinite(evalResult)) {
+          setResult('NaN');
+        } else {
+          setResult(evalResult.toString());
+        }
+      } else {
+        setResult('Error');
+      }
     } catch (error) {
       setResult('Error');
     }
   };
+
 
   const clearInput = () => {
     setExpression('');
